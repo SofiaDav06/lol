@@ -1,84 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Temporizador y Cronómetro</title>
+    <title>Temporizador, Cronómetro y Marcador Deportivo</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="marcador">
-        <h2>Marcador Deportivo</h2>
-        <div class="scoreboard">
-            <div class="team" style="background-color: blue;">
-                <input type="text" id="team1Name" placeholder="HOME">
-                <button onclick="incrementScore('team1')">+</button>
-                <span class="score" id="team1Score">0</span>
-                <button onclick="decrementScore('team1')">-</button>
-            </div>
-            <div class="team" style="background-color: blue;">
-                <input type="text" id="team2Name" placeholder="VISITOR">
-                <button onclick="incrementScore('team2')">+</button>
-                <span class="score" id="team2Score">0</span>
-                <button onclick="decrementScore('team2')">-</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="cuadrados">
-        <div class="cuadro">
-            <h3>Falta</h3>
-            <input type="number" id="falta1" value="0">
-        </div>
-        <div class="cuadro">
-            <h3>Periodo</h3>
-            <input type="number" id="periodo" value="1">
-        </div>
-        <div class="cuadro">
-            <h3>Falta</h3>
-            <input type="number" id="falta2" value="0">
-        </div>
-    </div>
-
     <div class="container">
+        <div class="marcador">
+            <div>
+                <input type="text" id="nombreEquipoLocal" placeholder="Equipo Local">
+                <button onclick="sumarPunto('local')">+</button>
+                <span id="puntosEquipoLocal" class="puntos">0</span>
+                <button onclick="restarPunto('local')">-</button>
+            </div>
+            <div>
+                <input type="text" id="nombreEquipoVisitante" placeholder="Equipo Visitante">
+                <button onclick="sumarPunto('visitante')">+</button>
+                <span id="puntosEquipoVisitante" class="puntos">0</span>
+                <button onclick="restarPunto('visitante')">-</button>
+            </div>
+        </div>
+
         <h2>Temporizador</h2>
-        <div id="temporizador" class="temporizador-grande">00:00:00</div>
         <input type="number" id="inputHoras" placeholder="Horas">
         <input type="number" id="inputMinutos" placeholder="Minutos">
         <input type="number" id="inputSegundos" placeholder="Segundos">
-        <div class="temporizador-buttons">
-            <button class="boton-verde" onclick="iniciarTemporizador()">Iniciar Temporizador</button>
-            <button class="boton-verde" onclick="detenerTemporizador()">Detener Temporizador</button>
+        <button onclick="iniciarTemporizador()">Iniciar Temporizador</button>
+        <button onclick="detenerTemporizador()">Detener Temporizador</button>
+        <div id="temporizador">00:00:00</div>
+
+        <h2>Cronómetro</h2>
+        <button onclick="iniciarCronometro()">Iniciar Cronómetro</button>
+        <button onclick="detenerCronometro()">Detener Cronómetro</button>
+        <div id="cronometro">00:00:00</div>
+
+        <div class="fecha-hora-actual">
+            <p>Fecha y Hora Actual: <span id="fechaHoraActual"></span></p>
         </div>
-    </div>
-
-    <h2 class="cronometro-title">Cronómetro</h2>
-    <div class="cronometro-container">
-        <div id="cronometro" class="temporizador-grande">00:00:00</div>
-        <div class="cronometro-buttons">
-            <button onclick="iniciarCronometro()" class="boton-verde">Iniciar Cronómetro</button>
-            <button onclick="detenerCronometro()" class="boton-verde">Detener Cronómetro</button>
-        </div>
-    </div>
-
-    <div class="theme-toggle">
-        <button class="boton-negro" onclick="toggleTheme()">Modo Claro/Oscuro</button>
-    </div>
-
-    <div class="fecha-hora-actual">
-        <p>Fecha y hora actual: <span id="currentDateTime"></span></p>
     </div>
     <script src="script.js"></script>
-    <script>
-        function updateDateTime() {
-            const now = new Date();
-            const dateStr = now.toLocaleDateString();
-            const timeStr = now.toLocaleTimeString();
-            document.getElementById('currentDateTime').textContent = `${dateStr} ${timeStr}`;
-        }
-
-        setInterval(updateDateTime, 1000); // Update every second
-        updateDateTime(); // Initial update
-    </script>
 </body>
 </html>
-
-
